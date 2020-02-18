@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, SettingsViewControllerDelegate {
+class ViewController: ColorViewController, SettingsViewControllerDelegate {
 
     @IBOutlet weak var fromField: UITextField!
     @IBOutlet weak var toField: UITextField!
@@ -20,8 +20,10 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNeedsStatusBarAppearanceUpdate()
         toField.delegate = self
         fromField.delegate = self
+        self.view.backgroundColor = BACKGROUND_COLOR
     }
 
     override func didReceiveMemoryWarning() {
@@ -134,6 +136,11 @@ class ViewController: UIViewController, SettingsViewControllerDelegate {
     {
         self.fromUnits.text = fromUnits.rawValue
         self.toUnits.text = toUnits.rawValue
+    }
+}
+extension UINavigationController{
+    override open var preferredStatusBarStyle : UIStatusBarStyle{
+        return topViewController?.preferredStatusBarStyle ?? .default
     }
 }
 
